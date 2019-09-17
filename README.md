@@ -1,14 +1,8 @@
----
-author: Ernesto Garbarino
-title: "Writing a Hangman Game in Vuejs"
-date: 2019-09-16
-abstract: A Vue.js + Bootstrap Vue tutorial.
-image: vuejs-hangman.png
----
+![](pictures/vuejs-hangman.png)
 
-# Introduction
+# Writing a Hangman Game in Vuejs
 
-This is a project-orientated [Vue.js](https://vuejs.org/) and [Bootstrap Vue](https://bootstrap-vue.js.org/) tutorial. The project is a mobile-first (but also desktop-friendly) Hangman game. The game can be played [here](http://egarbarino.github.io/hangman/). 
+This is a project-orientated [Vue.js](https://vuejs.org/) and [Bootstrap Vue](https://bootstrap-vue.js.org/) tutorial. The project is a mobile-first (but also desktop-friendly) Hangman game. The game can be played [here](http://egarbarino.github.io/vuejs-hangman/). 
 
 The game demonstrates the following capabilities:
 
