@@ -12,7 +12,7 @@
       </div>
       
       <div id="gameComponent">
-      <Keyboard v-on:key="processLetter" v-on:restart="reset" :usedLetters="usedLetters"/>
+      <Keyboard v-on:key="processLetter" v-on:restart="restart" :usedLetters="usedLetters"/>
       </div>
 
     </b-card>
@@ -45,14 +45,12 @@ export default {
       words : json.words
     } 
   },
-  created: function() {
-    this.reset();
-  },
   mounted: function() {
     window.addEventListener('keyup', this.keyPressed);
+    this.restart();
   },
   methods: {
-    reset: function() {
+    restart: function() {
       var min = 0;
       var max = this.words.length-1;
       var index = parseInt(Math.random() * (max - min) + min);
@@ -87,7 +85,7 @@ export default {
         this.usedLetters += letter;
       } 
       if (letter == "ESCAPE" || letter == " ") {
-        this.reset();
+        this.restart();
       } 
     }
   }
@@ -101,6 +99,6 @@ export default {
   min-width: 300px;
 }
 #gameComponent {
-  margin-top: 5px;
+  margin-top: 7px;
 }
 </style>

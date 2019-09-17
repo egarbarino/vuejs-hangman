@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+push.sh
 
 # local env files
 .env.local

@@ -7,13 +7,13 @@
                 pill 
                 variant="dark"
                 :disabled="usedLetters.includes(key)"
-                v-on:click="click(key)"
+                v-on:click="click(key, $event)"
                 >
                 {{key}}
       </b-button>
     </div>
-    <div>
-      <b-button variant="dark" v-on:click="$emit('restart')">Restart</b-button>
+    <div id="restart">
+      <b-button variant="dark" v-on:click="restart">Restart</b-button>
     </div>
   </div> 
 </template>
@@ -33,9 +33,13 @@ export default {
     } 
   },
   methods: {
-    click(key) {
-      console.log("clicked:" + key);
+    click(key,e) {
       this.$emit('key',key);
+      e.target.blur();
+    },
+    restart(e) { 
+      this.$emit('restart');
+      e.target.blur();
     }
   }
 }
@@ -44,7 +48,11 @@ export default {
 <style scoped>
 button {
   font-family: Consolas, 'Courier New', Courier, monospace;
-  margin-left: 3px;
+  font-weight: bold;
+  margin-left: 2px;
   margin-top: 3px;
+}
+#restart {
+  margin-top: 5px;
 }
 </style>

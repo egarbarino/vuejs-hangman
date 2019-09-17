@@ -6,7 +6,7 @@
     <b-progress :value="7-fails" :max="7" animated></b-progress>
     </div>
     <div v-if="fails >=0 && fails <7">
-    Attempts left: 
+    Attempts left
         <b-badge v-if="fails < 3" variant="success">{{7-fails}}</b-badge>
         <b-badge v-else-if="fails < 5" variant="warning">{{7-fails}}</b-badge>
         <b-badge v-else variant="danger">{{7-fails}}</b-badge>
@@ -26,15 +26,9 @@ export default {
   props: {
     fails: Number 
   },
-  data() {
-    return {
-      ctx: undefined
-    }
-  },
   methods: {
     renderStickMan: function() {
-      if (this.ctx == null) return;
-      var ctx = this.ctx;
+      var ctx = this.$refs['mycanvas'].getContext('2d');
       if (this.fails == 0) {
         ctx.clearRect(0, 0, 100,190);
         ctx.beginPath();
@@ -53,7 +47,6 @@ export default {
         ctx.moveTo(10, 165);
         ctx.lineTo(25, 180);
         ctx.stroke();
-
 
       }
       // Head 
@@ -130,7 +123,7 @@ export default {
     }
   },
   mounted() {
-    this.ctx = this.$refs['mycanvas'].getContext('2d');
+    //this.ctx = this.$refs['mycanvas'].getContext('2d');
     this.renderStickMan();
   },
   updated() {

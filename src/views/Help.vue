@@ -12,6 +12,9 @@
           <li>ESC/SPACE: Restart</li>
         </ul>
       </b-card-text>
+      <b-card-text>
+        Source code: <a href="https://www.github.com/egarbarino/vuejs-hangman">GitHub</a> 
+      </b-card-text>
      </b-card>
   </div>
 </template>
