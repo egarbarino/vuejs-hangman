@@ -2,7 +2,7 @@
 
 # Writing a Hangman Game in Vuejs
 
-This is a project-orientated [Vue.js](https://vuejs.org/) and [Bootstrap Vue](https://bootstrap-vue.js.org/) tutorial. The project is a mobile-first (but also desktop-friendly) Hangman game. The game can be played [here](http://egarbarino.github.io/vuejs-hangman/). 
+This is a project-orientated [Vue.js](https://vuejs.org/) and [Bootstrap Vue](https://bootstrap-vue.js.org/) demonstration. The project is a mobile-first (but also desktop-friendly) Hangman game. The game can be played [here](http://egarbarino.github.io/vuejs-hangman/). 
 
 The game demonstrates the following capabilities:
 
@@ -14,9 +14,9 @@ The game demonstrates the following capabilities:
 
 # Why Vue.js?
 
-Luckily, Vue.js is outside the "framework wars"; it does not aim to be more powerful alternative to React or Angular. Its objective is being _approachable:_ let's get developers up and running in a short time and only add complexity when and if needed. 
+Luckily, Vue.js is outside the "framework wars"; it does not aim to be a more powerful alternative to React or Angular. Its objective is being _approachable:_ "let's get developers up and running in a short time and only add complexity when and if needed" 
 
-This tutorial should prove Vue.js' low ceremony approach to building Single Page Applications (SPAs).
+This project should prove Vue.js' low ceremony approach to building Single Page Applications (SPAs).
 
 # Getting Started
 
@@ -69,7 +69,7 @@ cd vuejs-hangman
 npm run serve
 ```
 
-Please note that the finished project published on [GitHub](https://www.github.com/egarbarino/vuejs-hangman) does not require the `vue create` nor the package installation part. If cloning the GitHub project, we jump straight to `npm run serve` as indicated by the `README.md` file.
+Please note that the finished project published on [GitHub](https://www.github.com/egarbarino/vuejs-hangman) does not require the `vue create` nor the package installation part. If cloning the GitHub project, we jump straight to `npm run serve`.
 
 # High-level Architecture
 
@@ -100,18 +100,18 @@ In our application, we have defined six components in total.
 
 The components are as follows:
 
-1. Application: The top-most component that embeds the _Game_ and _Help_ views
-2. Game: The component that implements the game logic and embeds the _StickMan_, _Letters_, and _Keyboard_ components.
-3. Help: Instructions.
-4. StickMan: The component that renders the stick man and game progress.
-5. Letters: The component that renders the current word being guessed.
-6. Keyboard: The component that displays the on-screen keyboard
+1. App.vue: The top-most component that embeds the _Game_ and _Help_ views.
+2. views/Game.vue: The component that implements the game logic and embeds the _StickMan_, _Letters_, and _Keyboard_ components.
+3. views/Help.vue: Instructions.
+4. components/StickMan.vue: The component that renders the stick man and game progress.
+5. components/Letters.vue: The component that renders the current word being guessed.
+6. components/Keyboard.vue: The component that displays the on-screen keyboard.
 
 The convention is to store components that are bound to a given URI under `src/views` whereas atomic components go under `src/components`.
 
 ## Component Communication
 
-Components communicate with one another to exchange data. Components that receive _input_ data, declare such components as so-called _props_. For example, the `Letter` component declares a prop called `letters` of type `String`:
+Components communicate with one another to exchange data. Components that receive _input_ data declare such data using so-called _props_. For example, the `Letter.vue` component declares a prop called `letters` of type `String`:
 
 ``` html
 <script>
@@ -127,9 +127,43 @@ export default {
 Now, all components that use the `Letter` component can set the `letters` prop. For instance:
 
 ``` html
-<Letters letters="HELLO"/>
+<Letters letters="CHILE"/>
 ```
 
+If we want to assign `letters` to a JavaScript variable, we use the _bind_ syntax instead:
+
+``` html
+<Letters bind:letters="js_variable"/>
+```
+
+or
+
+``` html
+<Letters :letters="js_variable"/>
+```
+
+The `js_variable` may be a _prop_, an attribute returned by the `data()` method, or a compute value, among others.
+
+``` javascript 
+export default {
+  name: 'Letters',
+  props: {
+    // Set by the component's user! :) 
+    // <Letters js_variable_as_a_prop="CHILE"/>
+    js_variable_as_a_prop: String 
+  },
+  data() {
+    return {
+      js_variable_as_data: "CHILE";
+    }
+  },
+  computed: {
+    js_variable_as_computed() : {
+      return "CHILE";
+    }
+  }
+}
+```
 In addition, components may _output_ data via events using the `emit('event_name',payload)` method. For example, the `Keyword` component notifies of key presses on the on-screen keyboard as follows:  
 
 ``` javascript 
@@ -150,7 +184,4 @@ Game -> Letters  | props       | `guessedWord` (String)    | 'CHIL_'
 Game -> Keyboard | props       | `usedLettrs` (String)     | 'AEIOCIL'
 Keyboard -> Game | Vue event   | key -> letter (String)    | 'C'
 Keyboard -> Game | Vue event   | restart                   | n/a
-
-
-
 
